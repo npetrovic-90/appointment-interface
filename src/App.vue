@@ -1,17 +1,12 @@
 <template>
   <div id="main-app" class="container">
-    <h4>{{ title }}</h4>
-    <font-awesome-icon icon="plus" class="me-2"></font-awesome-icon>Add
-    appointment
-    <div v-for='(item,index) in appointments' v-bind:key='index'>
-      <h4>{{item.petName}}</h4>
-      <p>{{item.aptNotes}}</p>
-    </div>
+    <appointment-list v-bind:appointments='appointments'></appointment-list>
   </div>
 </template>
 
 <script>
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import  AppointmentList  from './components/AppointmentList'
 import axios from 'axios'
 export default {
   name: "MainApp",
@@ -22,7 +17,7 @@ export default {
     };
   },
   components: {
-    FontAwesomeIcon,
+    AppointmentList
   },
   mounted() {
     axios.get('./data/appointments.json')

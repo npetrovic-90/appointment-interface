@@ -1,27 +1,30 @@
 <template>
   <div id="main-app" class="container">
-    <appointment-list v-bind:appointments='appointments'></appointment-list>
+    <div class="row justify-content-center">
+      <appointment-list v-bind:appointments="appointments"></appointment-list>
+    </div>
   </div>
 </template>
 
 <script>
 // import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import  AppointmentList  from './components/AppointmentList'
-import axios from 'axios'
+import AppointmentList from "./components/AppointmentList";
+import axios from "axios";
 export default {
   name: "MainApp",
   data: function() {
     return {
       title: "Appointment list",
-      appointments: []
+      appointments: [],
     };
   },
   components: {
-    AppointmentList
+    AppointmentList,
   },
   mounted() {
-    axios.get('./data/appointments.json')
-          .then(response=>(this.appointments = response.data))
-  }
+    axios
+      .get("./data/appointments.json")
+      .then((response) => (this.appointments = response.data));
+  },
 };
 </script>

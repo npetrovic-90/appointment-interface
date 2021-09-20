@@ -1,6 +1,7 @@
 <template>
   <div id="main-app" class="container">
     <div class="row justify-content-center">
+      <add-appointment />
       <appointment-list
         v-bind:appointments="appointments"
         @remove="removeItem"
@@ -13,11 +14,13 @@
 <script>
 // import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import AppointmentList from "./components/AppointmentList";
+import AddAppointment from "./components/AddAppointment";
 import axios from "axios";
 import _ from "lodash";
+
 export default {
   name: "MainApp",
-  data: function () {
+  data: function() {
     return {
       appointments: [],
       aptIndex: 0,
@@ -25,6 +28,7 @@ export default {
   },
   components: {
     AppointmentList,
+    AddAppointment,
   },
   mounted() {
     axios.get("./data/appointments.json").then(
@@ -37,10 +41,10 @@ export default {
     );
   },
   methods: {
-    removeItem: function (apt) {
+    removeItem: function(apt) {
       this.appointments = _.without(this.appointments, apt);
     },
-    editItem: function (id, field, text) {
+    editItem: function(id, field, text) {
       const aptIndex = _.findIndex(this.appointments, {
         aptId: id,
       });

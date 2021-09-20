@@ -53,7 +53,7 @@ export default {
     FontAwesomeIcon,
   },
   methods: {
-    formattedDate: function (date) {
+    formattedDate: function(date) {
       return moment(new Date(date)).format("MM-DD-YY, h:mm a");
     },
   },

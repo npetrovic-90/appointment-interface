@@ -2,9 +2,15 @@
   <div id="main-app" class="container">
     <div class="row justify-content-center">
       <add-appointment @add="addItem" />
-      <search-appointments @searchRecords="searchAppointments" />
+      <search-appointments
+        @searchRecords="searchAppointments"
+        :myKey="filterKey"
+        :myDir="filterDir"
+        @requestKey="changeKey"
+        @requestDir="changeDir"
+      />
       <appointment-list
-        v-bind:appointments="searchedApts"
+        v-bind:appointments="filteredApts"
         @remove="removeItem"
         @edit="editItem"
       ></appointment-list>
@@ -25,6 +31,8 @@ export default {
   data: function() {
     return {
       appointments: [],
+      filterKey: "petName",
+      filterDir: "asc",
       aptIndex: 0,
       searchTerms: "",
     };
@@ -55,6 +63,15 @@ export default {
         );
       });
     },
+    filteredApts: function() {
+      return _.orderBy(
+        this.searchedApts,
+        (item) => {
+          return item[this.filterKey].toLowerCase();
+        },
+        this.filterDir
+      );
+    },
   },
   methods: {
     removeItem: function(apt) {
@@ -73,6 +90,12 @@ export default {
     },
     searchAppointments: function(terms) {
       this.searchTerms = terms;
+    },
+    changeKey: function(value) {
+      this.filterKey = value;
+    },
+    changeDir: function(value) {
+      this.filterDir = value;
     },
   },
 };

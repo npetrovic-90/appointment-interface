@@ -20,6 +20,7 @@
 
 <script>
 // import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+//App Finished
 import AppointmentList from "./components/AppointmentList";
 import AddAppointment from "./components/AddAppointment";
 import SearchAppointments from "./components/SearchAppointments";

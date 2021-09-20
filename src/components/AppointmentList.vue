@@ -11,14 +11,33 @@
       </button>
       <div class="w-100">
         <div class="d-flex justify-content-between">
-          <span class="h4 text-primary">{{ item.petName }}</span>
+          <span
+            class="h4 text-primary"
+            contenteditable="true"
+            @blur="
+              $emit('edit', item.aptId, 'petName', $event.target.innerText)
+            "
+            >{{ item.petName }}</span
+          >
           <span class="float-right">{{ formattedDate(item.aptDate) }}</span>
         </div>
-        <div class="owner-name">
+        <div>
           <span class="font-weight-bold text-primary mr-1">Owner:</span>
-          <span>{{ item.petOwner }}</span>
+          <span
+            class="owner-name"
+            contenteditable="true"
+            @blur="
+              $emit('edit', item.aptId, 'petOwner', $event.target.innerText)
+            "
+            >{{ item.petOwner }}</span
+          >
         </div>
-        <div>{{ item.aptNotes }}</div>
+        <div
+          contenteditable="true"
+          @blur="$emit('edit', item.aptId, 'aptNotes', $event.target.innerText)"
+        >
+          {{ item.aptNotes }}
+        </div>
       </div>
     </div>
   </div>

@@ -4,6 +4,7 @@
       <appointment-list
         v-bind:appointments="appointments"
         @remove="removeItem"
+        @edit="editItem"
       ></appointment-list>
     </div>
   </div>
@@ -38,6 +39,12 @@ export default {
   methods: {
     removeItem: function (apt) {
       this.appointments = _.without(this.appointments, apt);
+    },
+    editItem: function (id, field, text) {
+      const aptIndex = _.findIndex(this.appointments, {
+        aptId: id,
+      });
+      this.appointments[aptIndex][field] = text;
     },
   },
 };
